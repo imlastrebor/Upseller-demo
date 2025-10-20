@@ -38,9 +38,9 @@
   color: var(--vf-text-color);
 }
 
-.vfrc-header__title {
-  font-size: 1.05rem;
-  font-weight: 600;
+.vfrc-header__title,
+.vfrc-header--title {
+  visibility: hidden;
 }
 
 .vfrc-header__subtitle {
@@ -197,4 +197,3 @@
     transition-duration: 0.01ms !important;
   }
 }
-

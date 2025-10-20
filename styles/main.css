@@ -66,9 +66,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(15, 22, 36, 0.45);
+  background-color: transparent;
   border-radius: 1rem;
-  backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
