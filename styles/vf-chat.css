@@ -1,0 +1,200 @@
+@import url("./tokens.css");
+
+/* ==========================================================================
+   Widget shell
+   ========================================================================== */
+.vfrc-widget,
+.vfrc-widget--embedded,
+.vfrc-chat {
+  font-family: var(--vf-font-family);
+  color: var(--vf-text-color);
+  background-color: var(--vf-chat-surface);
+  border-radius: var(--vf-radius-lg);
+  border: 1px solid var(--vf-border-color);
+  box-shadow: 0 32px 60px var(--vf-shadow-color);
+  backdrop-filter: none;
+}
+
+.vfrc-widget--embedded .vfrc-chat {
+  background-color: inherit;
+  border-radius: inherit;
+  border: inherit;
+  box-shadow: inherit;
+}
+
+.vfrc-widget *,
+.vfrc-widget *::before,
+.vfrc-widget *::after {
+  font-family: inherit;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.vfrc-header {
+  background: transparent;
+  border-bottom: 1px solid var(--vf-border-color);
+  padding: var(--vf-spacing-md) var(--vf-spacing-lg);
+  color: var(--vf-text-color);
+}
+
+.vfrc-header__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.vfrc-header__subtitle {
+  color: var(--vf-text-color-muted);
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Message stream
+   ========================================================================== */
+.vfrc-message-list,
+.vfrc-system-response,
+.vfrc-user-response {
+  background: transparent;
+}
+
+.vfrc-message {
+  border-radius: var(--vf-radius-md);
+  padding: var(--vf-spacing-sm) var(--vf-spacing-md);
+  line-height: 1.45;
+  box-shadow: none;
+}
+
+.vfrc-system-response .vfrc-message {
+  background-color: var(--vf-system-bubble-bg);
+  border: 1px solid var(--vf-system-bubble-border);
+  color: var(--vf-text-color);
+}
+
+.vfrc-user-response .vfrc-message {
+  background-color: var(--vf-user-bubble-bg);
+  border: 1px solid var(--vf-user-bubble-border);
+  color: var(--vf-button-text);
+}
+
+.vfrc-message__content a {
+  color: var(--vf-button-text);
+  text-decoration: underline;
+}
+
+.vfrc-message__content strong {
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Quick replies & buttons
+   ========================================================================== */
+.vfrc-buttons,
+.vfrc-button {
+  background: transparent;
+}
+
+.vfrc-button {
+  border-radius: var(--vf-radius-sm);
+  border: 1px solid var(--vf-button-border);
+  background-color: var(--vf-button-bg);
+  color: var(--vf-button-text);
+  padding: var(--vf-spacing-xs) var(--vf-spacing-md);
+  transition: background-color var(--vf-transition), border-color var(--vf-transition), color var(--vf-transition);
+}
+
+.vfrc-button:hover {
+  background-color: rgba(114, 214, 255, 0.28);
+}
+
+.vfrc-button:focus-visible {
+  outline: var(--vf-focus-ring);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Composer / input
+   ========================================================================== */
+.vfrc-composer {
+  border-top: 1px solid var(--vf-border-color);
+  background-color: transparent;
+  padding: var(--vf-spacing-md) var(--vf-spacing-lg);
+}
+
+.vfrc-input {
+  background-color: var(--vf-input-bg);
+  border-radius: var(--vf-radius-sm);
+  border: 1px solid var(--vf-input-border);
+  color: var(--vf-button-text);
+  padding: var(--vf-spacing-sm) var(--vf-spacing-md);
+  transition: border-color var(--vf-transition), box-shadow var(--vf-transition);
+}
+
+.vfrc-input::placeholder {
+  color: var(--vf-text-color-muted);
+}
+
+.vfrc-input:focus-visible {
+  outline: var(--vf-focus-ring);
+  outline-offset: 2px;
+}
+
+.vfrc-composer button {
+  color: var(--vf-button-text);
+}
+
+/* ==========================================================================
+   Scrollbar
+   ========================================================================== */
+.vfrc-chat ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.vfrc-chat ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.vfrc-chat ::-webkit-scrollbar-thumb {
+  background: rgba(114, 214, 255, 0.35);
+  border-radius: 999px;
+}
+
+/* ==========================================================================
+   States / utilities
+   ========================================================================== */
+.vfrc-message-list {
+  padding: var(--vf-spacing-lg);
+}
+
+.vfrc-assistant-info {
+  color: var(--vf-text-color-muted);
+}
+
+.vfrc-error,
+.vfrc-notification {
+  background: rgba(210, 64, 64, 0.12);
+  border: 1px solid rgba(210, 64, 64, 0.35);
+  color: #ffd1d1;
+}
+
+@media (max-width: 480px) {
+  .vfrc-widget,
+  .vfrc-widget--embedded,
+  .vfrc-chat {
+    border-radius: var(--vf-radius-md);
+    box-shadow: 0 20px 45px var(--vf-shadow-color);
+  }
+
+  .vfrc-message-list {
+    padding: var(--vf-spacing-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vfrc-widget *,
+  .vfrc-widget *::before,
+  .vfrc-widget *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

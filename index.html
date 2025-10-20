@@ -58,12 +58,17 @@
                 voice: {
                   url: "https://runtime-api.voiceflow.com",
                 },
-                render: {
-                  mode: "embedded",
-                  target: document.getElementById("voiceflow-target"),
-                },
-              });
-            };
+              render: {
+                mode: "embedded",
+                target: document.getElementById("voiceflow-target"),
+              },
+              assistant: {
+                type: "chat",
+                renderMode: "embed",
+                stylesheet: "styles/vf-chat.css",
+              },
+            });
+          };
             v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
             v.type = "text/javascript";
             s.parentNode.insertBefore(v, s);
