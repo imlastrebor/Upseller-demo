@@ -6,8 +6,10 @@
 .vfrc-widget--embedded,
 .vfrc-chat {
   --vf-font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --vf-text-color: #0F2D32;
-  --vf-text-color-muted: rgba(246, 248, 255, 0.72);
+  --vf-text-color: rgb(15, 45, 50);
+  --vf-text-color-muted: rgb(38, 59, 63);
+  --vf-text-color-light: rgba(255, 255, 255, 1);
+  --vf-text-color-light-muted: rgb(227, 232, 232);
   --vf-chat-surface: transparent;
   --vf-border-color: rgba(255, 255, 255, 0.18);
   --vf-shadow-color: rgba(4, 10, 22, 0.45);
@@ -18,7 +20,9 @@
   --vf-user-text-color: #0f2d32;
   --vf-input-bg: rgba(6, 13, 28, 0.78);
   --vf-input-border: rgba(114, 214, 255, 0.35);
-  --vf-button-bg: rgba(114, 214, 255, 0.18);
+  --vf-button-bg: rgb(254, 255, 255);
+  --vf-button-bg-accent:#48C6EA;
+
   --vf-button-border: rgba(114, 214, 255, 0.45);
   --vf-button-text: #0F2D32;
   --vf-focus-ring: 2px solid rgba(114, 214, 255, 0.9);
@@ -188,6 +192,14 @@
   color: var(--vf-button-text);
 }
 
+.vfrc-chat-input__send{
+  border-radius: var(--vf-radius-lg);
+  background-color: var(--vf-button-bg-accent);
+}
+.vfrc-chat-input__send > *{
+  color: var(--vf-button-text);
+}
+
 /* ==========================================================================
    Scrollbar
    ========================================================================== */
@@ -215,6 +227,14 @@
   color: var(--vf-text-color-muted);
 }
 
+.vfrc-assistant-info--title{
+  color: var(--vf-text-color-light);
+}
+
+.vfrc-assistant-info--description {
+  color: var(--vf-text-color-light-muted);
+}
+
 .vfrc-error,
 .vfrc-notification {
   background: rgba(210, 64, 64, 0.12);
@@ -229,6 +249,9 @@
 .vfrc-footer__content {
   background: none;              /* removes color + image */
   background-image: none;        /* belt-and-suspenders */
+}
+.vfrc-footer__links > *{
+  color: var(--vf-text-color-light-muted);
 }
 
 
