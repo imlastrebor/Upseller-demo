@@ -134,7 +134,6 @@
   border: 1px solid var(--vf-button-border);
   background-color: var(--vf-button-bg);
   color: var(--vf-button-text);
-  padding: var(--vf-spacing-xs) var(--vf-spacing-md);
   display: inline-flex;
   align-items: center;
   gap: var(--vf-spacing-xs);
@@ -151,12 +150,12 @@
   outline-offset: 3px;
 }
 
-.vfrc-button svg,
+/* .vfrc-button svg,
 .vfrc-button img {
   width: 1.1rem;
   height: 1.1rem;
   flex-shrink: 0;
-}
+} */
 
 /* ==========================================================================
    Composer / input
