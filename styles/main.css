@@ -101,10 +101,14 @@ body {
 }
 
 @media (max-width: 600px) {
+    .site-main {
+        justify-content: flex-start;
+    }
   .floating-link {
     font-size: 0.95rem;
   }
   .chat-shell {
     width: 100%;
   }
+  
 }

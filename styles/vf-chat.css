@@ -270,7 +270,6 @@
   .vfrc-widget--embedded,
   .vfrc-chat {
     border-radius: var(--vf-radius-md);
-    box-shadow: 0 20px 45px var(--vf-shadow-color);
   }
 
   .vfrc-message-list {
