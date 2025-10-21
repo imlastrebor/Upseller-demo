@@ -13,7 +13,7 @@
   --vf-chat-surface: transparent;
   --vf-border-color: rgba(255, 255, 255, 0.18);
   --vf-shadow-color: rgba(4, 10, 22, 0.45);
-  --vf-system-bubble-bg: rgba(255, 255, 255, 0.72);
+  --vf-system-bubble-bg: rgba(255, 255, 255, 0.9);
   --vf-system-bubble-border: rgba(255, 255, 255, 0.12);
   --vf-user-bubble-bg: rgba(114, 214, 255, 0.16);
   --vf-user-bubble-border: rgba(114, 214, 255, 0.3);
@@ -77,6 +77,16 @@
   color: var(--vf-text-color-muted);
   font-size: 0.85rem;
 }
+
+:host .vfrc-header .vfrc-avatar {
+  border-radius: 0 !important;       /* remove circular mask */
+  clip-path: none !important;         /* disable any circular clipping */
+  object-fit: contain !important;     /* keep logo aspect ratio */
+  background: transparent !important;
+  overflow: visible !important;
+  width: 120px;
+}
+
 
 /* ==========================================================================
    Message stream
