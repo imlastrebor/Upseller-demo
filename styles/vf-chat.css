@@ -176,6 +176,16 @@
   color: #ffd1d1;
 }
 
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+/* Remove the footer content gradient/background */
+.vfrc-footer__content {
+  background: none;              /* removes color + image */
+  background-image: none;        /* belt-and-suspenders */
+}
+
+
 @media (max-width: 480px) {
   .vfrc-widget,
   .vfrc-widget--embedded,
