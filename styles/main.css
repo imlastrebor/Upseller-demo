@@ -70,6 +70,16 @@ body {
   border-radius: 1rem;
 }
 
+.chat-shell__message {
+  margin: 0;
+  padding: 1.5rem;
+  max-width: 32rem;
+  text-align: center;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
 .floating-link {
   display: inline-flex;
   align-items: center;

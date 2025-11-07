@@ -40,40 +40,10 @@
     </header>
 
     <main id="main-content" class="site-main" role="main" aria-label="Chat area">
-      <div
-        id="voiceflow-target"
-        class="chat-shell"
-        role="region"
-        aria-label="Voiceflow chat"
-      >
-        <script type="text/javascript">
-          (function (d, t) {
-            var v = d.createElement(t),
-              s = d.getElementsByTagName(t)[0];
-            v.onload = function () {
-              window.voiceflow.chat.load({
-                verify: { projectID: "689da2cc86c8ad96b0650b0f" },
-                url: "https://general-runtime.voiceflow.com",
-                versionID: "production",
-                voice: {
-                  url: "https://runtime-api.voiceflow.com",
-                },
-              render: {
-                mode: "embedded",
-                target: document.getElementById("voiceflow-target"),
-              },
-              assistant: {
-                type: "chat",
-                renderMode: "embed",
-                stylesheet: "styles/vf-chat.css",
-              },
-            });
-          };
-            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-            v.type = "text/javascript";
-            s.parentNode.insertBefore(v, s);
-          })(document, "script");
-        </script>
+      <div class="chat-shell" role="region" aria-label="Voiceflow chat">
+        <p class="chat-shell__message">
+          Tap the Voiceflow chat bubble in the corner to start the conversation.
+        </p>
       </div>
       <a
         class="floating-link"
@@ -95,5 +65,25 @@
     <footer class="site-footer" role="contentinfo">
       <p class="visually-hidden">Footer</p>
     </footer>
+
+    <script type="text/javascript">
+      (function (d, t) {
+        var v = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+        v.onload = function () {
+          window.voiceflow.chat.load({
+            verify: { projectID: "68f9dca7b9abe8c36ec96e77" },
+            url: "https://general-runtime.voiceflow.com",
+            versionID: "production",
+            voice: {
+              url: "https://runtime-api.voiceflow.com",
+            },
+          });
+        };
+        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+        v.type = "text/javascript";
+        s.parentNode.insertBefore(v, s);
+      })(document, "script");
+    </script>
   </body>
 </html>
