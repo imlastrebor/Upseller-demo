@@ -66,96 +66,13 @@
       <p class="visually-hidden">Footer</p>
     </footer>
 
-    <script type="text/javascript">
-      (function () {
-        const EVENT_ENDPOINT = "https://upseller-analytics.vercel.app/api/events";
-        const EVENT_TOKEN = "test_sandbox_write_token_123";
-        const PROJECT_ID = "68f9dca7b9abe8c36ec96e77";
+    <!-- Upseller Embed Script -->
+<script src="https://embed.upseller.cloud/plugin-v5/embed.js" async></script>
+<script>
+window['_Up'] = window['_Up'] || {};
+window['_Up']._UpCId = 'upseller-analytics-test';
+</script>
+<!-- End Upseller Embed Script -->
 
-        async function sendCustomEvent(eventName, props = {}) {
-          if (!eventName) {
-            console.warn("Missing event name for custom analytics event.");
-            return;
-          }
-
-          try {
-            await fetch(EVENT_ENDPOINT, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${EVENT_TOKEN}`,
-              },
-              body: JSON.stringify({
-                events: [
-                  {
-                    event_id: (crypto && crypto.randomUUID
-                      ? crypto.randomUUID()
-                      : String(Date.now())),
-                    event_name: eventName,
-                    occurred_at: new Date().toISOString(),
-                    project_id: PROJECT_ID,
-                    properties: props,
-                  },
-                ],
-              }),
-            });
-          } catch (error) {
-            console.error("Failed to send event", eventName, error);
-          }
-        }
-
-        window.sendCustomEvent = sendCustomEvent;
-        window.__vfWidgetSeenSent = false;
-      })();
-    </script>
-
-    <script type="text/javascript">
-      (function (d, t) {
-        var v = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-        v.onload = function () {
-          function emitWidgetSeen() {
-            if (window.__vfWidgetSeenSent || typeof window.sendCustomEvent !== "function") {
-              return;
-            }
-            window.__vfWidgetSeenSent = true;
-            window.sendCustomEvent("widget_seen", {
-              page: window.location.pathname,
-            });
-          }
-
-          window.addEventListener("VF_CHAT_READY", emitWidgetSeen, {
-            once: true,
-          });
-
-          const observer = new MutationObserver(function (_, obs) {
-            const widget = document.querySelector(
-              "#voiceflow-chat, [data-testid='vf-chat-widget'], .vf-chat"
-            );
-            if (widget) {
-              emitWidgetSeen();
-              obs.disconnect();
-            }
-          });
-
-          observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-          });
-
-          window.voiceflow.chat.load({
-            verify: { projectID: "68f9dca7b9abe8c36ec96e77" },
-            url: "https://general-runtime.voiceflow.com",
-            versionID: "production",
-            voice: {
-              url: "https://runtime-api.voiceflow.com",
-            },
-          });
-        };
-        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-        v.type = "text/javascript";
-        s.parentNode.insertBefore(v, s);
-      })(document, "script");
-    </script>
   </body>
 </html>
