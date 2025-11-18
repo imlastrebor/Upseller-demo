@@ -13,6 +13,12 @@ export const removePreviousFeedback = () => {
     ?.forEach((el) => el.remove());
 };
 
+const insertAfter = (target, node) => {
+  const parent = target?.parentNode;
+  if (!parent) return;
+  parent.insertBefore(node, target.nextSibling);
+};
+
 const showSnackbar = (messageElement) => {
   const snackbar = document.createElement("div");
   snackbar.classList.add(SNACKBAR_CLASS);
@@ -39,7 +45,7 @@ const showSnackbar = (messageElement) => {
     </style>
   `;
 
-  messageElement.appendChild(snackbar);
+  insertAfter(messageElement, snackbar);
   setTimeout(() => snackbar.remove(), SNACKBAR_DURATION_MS);
 };
 
@@ -121,7 +127,7 @@ export const renderFeedbackUI = (messageElement) => {
     });
   });
 
-  messageElement.appendChild(container);
+  insertAfter(messageElement, container);
 };
 
 export const attachMockFeedbackToVoiceflow = () => {

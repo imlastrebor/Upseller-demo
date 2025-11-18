@@ -187,6 +187,12 @@ window.addEventListener('load', () => {
           ?.forEach((el) => el.remove());
       };
 
+      const insertAfter = (target, node) => {
+        const parent = target?.parentNode;
+        if (!parent) return;
+        parent.insertBefore(node, target.nextSibling);
+      };
+
       const showSnackbar = (messageElement) => {
         const snackbar = document.createElement("div");
         snackbar.classList.add(SNACKBAR_CLASS);
@@ -212,7 +218,7 @@ window.addEventListener('load', () => {
             }
           </style>
         `;
-        messageElement.appendChild(snackbar);
+        insertAfter(messageElement, snackbar);
         setTimeout(() => snackbar.remove(), SNACKBAR_DURATION_MS);
       };
 
@@ -290,7 +296,7 @@ window.addEventListener('load', () => {
             showSnackbar(messageElement);
           });
         });
-        messageElement.appendChild(container);
+        insertAfter(messageElement, container);
       };
 
       const attachMockFeedbackToVoiceflow = () => {
