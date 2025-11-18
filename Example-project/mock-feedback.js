@@ -89,6 +89,7 @@ export const renderFeedbackUI = (messageElement) => {
   `;
 
   const buttons = container.querySelectorAll(".vf-fb-button");
+  const messageText = (messageElement?.textContent || "").trim();
   buttons.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       buttons.forEach((b) => {
@@ -96,7 +97,12 @@ export const renderFeedbackUI = (messageElement) => {
         b.classList.add("disabled");
       });
       const selected = event.currentTarget;
+      const feedbackValue = selected.getAttribute("data-feedback") === "1" ? "up" : "down";
       selected.classList.add("selected");
+      console.log("[Upseller Analytics]: feedback submitted", {
+        feedback: feedbackValue,
+        message: messageText,
+      });
     });
   });
 
