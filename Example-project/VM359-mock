@@ -1,0 +1,77 @@
+  import { attachMockFeedbackToVoiceflow } from "./mock-feedback.js";
+
+  // Attach feedback UI to every bot response (icon-only, no API call).
+  attachMockFeedbackToVoiceflow();
+
+  (function (d, t) {
+    var v = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    v.onload = function () {
+      window.voiceflow.chat
+        .load({
+          verify: { projectID: "685c188185cda19294fa2ff9" },
+          url: "https://general-runtime.voiceflow.com",
+          versionID: "production",
+          voice: { url: "https://runtime-api.voiceflow.com" },
+          assistant: {
+            persistence: "sessionStorage",
+            stylesheet: "https://vf-cloudflare-pages.pages.dev/crocs-lt.css",
+          },
+        })
+        .then(() => {
+          // Example: auto-open on a button click and fire an intent on first open.
+          const elementToClick = document.getElementById("open-chatbot");
+          if (elementToClick) {
+            elementToClick.addEventListener("click", () => {
+              const isChatbotOpen = sessionStorage.getItem("isChatbotOpen");
+              window.voiceflow.chat.open();
+              if (isChatbotOpen) return;
+              setTimeout(() => {
+                sessionStorage.setItem("isChatbotOpen", true);
+                window.voiceflow.chat.interact({
+                  type: "intent",
+                  payload: { intent: { name: "open_chatbot" }, entities: [] },
+                });
+              }, 2000);
+            });
+          }
+        })
+        .then(() => {
+          // Minimal proactive prompt example (optional).
+          window.voiceflow.chat.proactive.clear();
+          const shownData = localStorage.getItem("crocsltProactiveMessageShown");
+          if (shownData) {
+            const shownTimestamp = Number(shownData);
+            const ONE_DAY = 24 * 60 * 60 * 1000;
+            if (shownTimestamp && Date.now() - shownTimestamp < ONE_DAY) {
+              return;
+            }
+          }
+
+          const popupInSeconds = 5000;
+          setTimeout(() => {
+            sessionStorage.setItem("proactiveMessageTime", 350);
+            window.voiceflow.chat.proactive.push({
+              type: "text",
+              payload: { message: `Galiu padėti - parašykite!` },
+            });
+            setTimeout(() => {
+              const proactiveButton = document
+                .querySelector("#voiceflow-chat")
+                ?.shadowRoot?.querySelector(".vfrc-proactive .vfrc-button");
+              if (proactiveButton) {
+                proactiveButton.addEventListener("click", () => {
+                  localStorage.setItem(
+                    "crocsltProactiveMessageShown",
+                    Date.now().toString()
+                  );
+                });
+              }
+            }, 350);
+          }, popupInSeconds);
+        });
+    };
+    v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+    v.type = "text/javascript";
+    s.parentNode.insertBefore(v, s);
+  })(document, "script");
