@@ -89,7 +89,13 @@ export const renderFeedbackUI = (messageElement) => {
   `;
 
   const buttons = container.querySelectorAll(".vf-fb-button");
-  const messageText = (messageElement?.textContent || "").trim();
+  const getMessageText = () => {
+    const target =
+      messageElement?.querySelector(
+        ".vfrc-message__text, .vfrc-assistant-message, .vfrc-system-message"
+      ) || messageElement;
+    return (target?.innerText || "").trim().replace(/\s+/g, " ");
+  };
   buttons.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       buttons.forEach((b) => {
@@ -101,7 +107,7 @@ export const renderFeedbackUI = (messageElement) => {
       selected.classList.add("selected");
       console.log("[Upseller Analytics]: feedback submitted", {
         feedback: feedbackValue,
-        message: messageText,
+        message: getMessageText(),
       });
     });
   });
