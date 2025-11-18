@@ -99,6 +99,13 @@ const UPS_ANALYTICS_URL = 'https://upseller-analytics.vercel.app/api/events';
 const UPS_EVENT_TOKEN = 'test_sandbox_write_token_123';
 const VF_TEST_PROJECT_ID = '68f9dca7b9abe8c36ec96e77';
 const VF_WIDGET_HOST_SELECTOR = '#voiceflow-chat';
+const UPS_SESSION_ID =
+  localStorage.getItem('ups_session_id') ||
+  (() => {
+    const id = crypto.randomUUID();
+    localStorage.setItem('ups_session_id', id);
+    return id;
+  })();
 
 async function sendWidgetEvent(eventName, props = {}) {
   try {
@@ -114,9 +121,10 @@ async function sendWidgetEvent(eventName, props = {}) {
           {
             event_id: crypto.randomUUID(),
             event_name: eventName,
+            session_id: UPS_SESSION_ID,
             occurred_at: new Date().toISOString(),
             project_id: VF_TEST_PROJECT_ID,
-            properties: props,
+            properties: { page: window.location.pathname, ...props },
           },
         ],
       }),
@@ -276,9 +284,10 @@ window.addEventListener('load', () => {
             const feedbackValue =
               selected.getAttribute("data-feedback") === "1" ? "up" : "down";
             selected.classList.add("selected");
-            console.log("[Upseller Analytics]: feedback submitted", {
-              feedback: feedbackValue,
-              message: getMessageText(),
+            sendWidgetEvent("feedback_submitted", {
+              rating: feedbackValue,
+              prompt: getMessageText(),
+              session_id: UPS_SESSION_ID,
             });
           });
         });
