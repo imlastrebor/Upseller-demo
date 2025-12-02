@@ -266,6 +266,10 @@ window.addEventListener('load', () => {
           .${FEEDBACK_CONTAINER_CLASS} .vf-fb-tooltip.${TOOLTIP_OPEN_CLASS} {
             display: block;
           }
+          .${FEEDBACK_CONTAINER_CLASS} .vf-fb-tooltip.vf-fb-tooltip--flip {
+            top: auto;
+            bottom: 34px;
+          }
           .${FEEDBACK_CONTAINER_CLASS} .vf-fb-tooltip__bubble {
             position: relative;
             min-width: 200px;
@@ -283,6 +287,12 @@ window.addEventListener('load', () => {
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
             border-bottom: 6px solid #0f2d32;
+          }
+          .${FEEDBACK_CONTAINER_CLASS} .vf-fb-tooltip.vf-fb-tooltip--flip .vf-fb-tooltip__bubble::before {
+            top: auto;
+            bottom: -6px;
+            border-bottom: none;
+            border-top: 6px solid #0f2d32;
           }
           .${FEEDBACK_CONTAINER_CLASS} .vf-fb-tooltip__label {
             font-size: 0.85rem;
@@ -374,11 +384,22 @@ window.addEventListener('load', () => {
         let locked = false;
 
         const openTooltip = () => {
+          tooltip.classList.remove("vf-fb-tooltip--flip");
           tooltip.classList.add(TOOLTIP_OPEN_CLASS);
+          const shadow = getChatShadowRoot();
+          const hostRect = shadow?.host?.getBoundingClientRect();
+          const containerRect = container.getBoundingClientRect();
+          const tooltipRect = tooltip.getBoundingClientRect();
+          const spaceBelow = hostRect
+            ? hostRect.bottom - containerRect.bottom
+            : window.innerHeight - containerRect.bottom;
+          if (spaceBelow < tooltipRect.height + 12) {
+            tooltip.classList.add("vf-fb-tooltip--flip");
+          }
           textarea.focus();
         };
 
-        const closeTooltip = () => tooltip.classList.remove(TOOLTIP_OPEN_CLASS);
+        const closeTooltip = () => tooltip.classList.remove(TOOLTIP_OPEN_CLASS, "vf-fb-tooltip--flip");
 
         const finalizeFeedback = (commentText = "") => {
           if (!currentRating || locked) return;
