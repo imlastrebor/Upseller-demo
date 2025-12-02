@@ -198,6 +198,9 @@ window.addEventListener('load', () => {
       );
 
       const getChatShadowRoot = () => document.querySelector("#voiceflow-chat")?.shadowRoot;
+      const getComposerTop = (shadow) =>
+        shadow?.querySelector(".vfrc-input-container")?.getBoundingClientRect().top ??
+        window.innerHeight;
 
       const ensureFeedbackStyles = (shadowRoot) => {
         if (!shadowRoot || shadowRoot.getElementById(STYLES_ID)) return;
@@ -261,7 +264,7 @@ window.addEventListener('load', () => {
             position: absolute;
             top: 34px;
             left: 0;
-            z-index: 5;
+            z-index: 50;
           }
           .${FEEDBACK_CONTAINER_CLASS} .vf-fb-tooltip.${TOOLTIP_OPEN_CLASS} {
             display: block;
@@ -387,12 +390,10 @@ window.addEventListener('load', () => {
           tooltip.classList.remove("vf-fb-tooltip--flip");
           tooltip.classList.add(TOOLTIP_OPEN_CLASS);
           const shadow = getChatShadowRoot();
-          const hostRect = shadow?.host?.getBoundingClientRect();
           const containerRect = container.getBoundingClientRect();
           const tooltipRect = tooltip.getBoundingClientRect();
-          const spaceBelow = hostRect
-            ? hostRect.bottom - containerRect.bottom
-            : window.innerHeight - containerRect.bottom;
+          const composerTop = getComposerTop(shadow);
+          const spaceBelow = composerTop - containerRect.bottom;
           if (spaceBelow < tooltipRect.height + 12) {
             tooltip.classList.add("vf-fb-tooltip--flip");
           }
